@@ -1,0 +1,8 @@
+type Media {
+  id: Int
+  name: String
+}
+
+type Query {
+  helloMedia: [Media]
+}
