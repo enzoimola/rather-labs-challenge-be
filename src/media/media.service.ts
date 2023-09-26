@@ -48,9 +48,6 @@ export class MediaService {
     const data = isMovie
       ? await this.movieService.findById(id)
       : await this.tvService.findById(id);
-    // const movieData = await this.movieService.findById(id);
-    // const tvData = await this.tvService.findById(id);
-    // const [movies, tvs] = await Promise.all([movieData, tvData]);
 
     return data;
   }

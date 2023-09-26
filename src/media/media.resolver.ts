@@ -16,8 +16,11 @@ export class MediaResolver {
   }
 
   @Query(() => DetailMedia)
-  async detailMedia(): Promise<IDetailMedia> {
-    const resp = await this.mediaService.fetchFindBy(215103, false);
+  async detailMedia(
+    @Args('id', { type: () => Number }) id: number,
+    @Args('isMovie', { type: () => Boolean }) isMovie: boolean,
+  ): Promise<IDetailMedia> {
+    const resp = await this.mediaService.fetchFindBy(id, isMovie);
     return resp;
   }
 

@@ -6,6 +6,16 @@ type Media {
   release_date: String
 }
 
+type DetailMediaType {
+  id: Int!
+  name: String!
+  posterPath: String
+  releaseDate: String
+  voteAverage: Int
+  overview: String
+}
+
 type Query {
   media: [Media!]
+  detailMedia(id: Int, isMovie: Boolean): DetailMediaType!,
 }

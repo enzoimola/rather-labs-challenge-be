@@ -22,5 +22,5 @@ type DetailMedia {
 
 type Query {
   media: [Media!]!
-  detailMedia: DetailMedia!
+  detailMedia(id: Float!, isMovie: Boolean!): DetailMedia!
 }
