@@ -2,6 +2,8 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { MediaService } from './media.service';
 import { Media } from './entities/media.entity';
 import { IMedia } from '../models/interfaces/media.interface';
+import { DetailMedia } from './entities/detailMedia.entity';
+import { IDetailMedia } from '../models/interfaces/detailMedia.interface';
 
 @Resolver(() => Media)
 export class MediaResolver {
@@ -10,6 +12,12 @@ export class MediaResolver {
   @Query(() => [Media])
   async media(): Promise<Array<IMedia>> {
     const resp = await this.mediaService.fetchMedia();
+    return resp;
+  }
+
+  @Query(() => DetailMedia)
+  async detailMedia(): Promise<IDetailMedia> {
+    const resp = await this.mediaService.fetchFindBy(215103, false);
     return resp;
   }
 

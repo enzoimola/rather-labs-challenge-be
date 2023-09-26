@@ -24,7 +24,7 @@ export class TvRepository {
   }
 
   async findById(id: number): Promise<TvDetailDbResponse> {
-    const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+    const url = `https://api.themoviedb.org/3/tv/${id}?language=en-US`;
 
     const options = {
       method: 'GET',

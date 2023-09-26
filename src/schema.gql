@@ -11,6 +11,16 @@ type Media {
   isMovie: Boolean
 }
 
+type DetailMedia {
+  id: Float!
+  name: String!
+  posterPath: String
+  releaseDate: String
+  voteAverage: Float
+  overview: String
+}
+
 type Query {
   media: [Media!]!
+  detailMedia: DetailMedia!
 }
