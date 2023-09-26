@@ -1,25 +1,59 @@
 import { Injectable } from '@nestjs/common';
 import { MovieDbResponseResult } from '../../models/types/movie-db-response/MovieDbResponseResult.type';
 import { MovieRepository } from './movie.repository';
-import { Media } from '../../media/entities/media.entity';
 import { IMedia } from '../../models/interfaces/media.interface';
+import { IDetailMedia } from '../../models/interfaces/detailMedia.interface';
+import { MovieDetailDbResponse } from '../../models/types/movie-db-response/MovieDetailDbResponse';
 
 @Injectable()
 export class MovieService {
   constructor(private readonly movieRepository: MovieRepository) {}
 
-  async findAll(): Promise<IMedia> {
+  async findAll(): Promise<Array<IMedia>> {
     const results: Array<MovieDbResponseResult> =
       await this.movieRepository.findAll();
     return this.movieDbResultToMediaParser(results);
   }
 
-  movieDbResultToMediaParser(results: Array<MovieDbResponseResult>): IMedia {
+  movieDbResultToMediaParser(
+    results: Array<MovieDbResponseResult>,
+  ): Array<IMedia> {
+    return results.map((r: MovieDbResponseResult) => ({
+      id: r.id,
+      name: r.original_title || r.title,
+      poster_path: r.poster_path,
+      release_date: r.release_date,
+      vote_average: r.vote_average,
+      isMovie: true,
+    }));
+  }
+
+  async findById(id: number): Promise<IDetailMedia> {
+    const result: MovieDetailDbResponse =
+      await this.movieRepository.findById(id);
+    return this.movieDetailDbResultToMediaParser(result);
+  }
+
+  movieDetailDbResultToMediaParser(
+    result: MovieDetailDbResponse,
+  ): IDetailMedia {
+    const {
+      id,
+      original_title,
+      title,
+      poster_path,
+      release_date,
+      vote_average,
+      overview,
+    } = result;
+
     return {
-      result: results.map((r: MovieDbResponseResult) => ({
-        id: r.id,
-        name: r.original_title || r.title,
-      })),
+      id,
+      name: title || original_title,
+      posterPath: poster_path,
+      releaseDate: release_date,
+      voteAverage: vote_average,
+      overview,
     };
   }
 }

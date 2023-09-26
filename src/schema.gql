@@ -3,9 +3,14 @@
 # ------------------------------------------------------
 
 type Media {
-  media: String!
+  id: Float!
+  name: String!
+  poster_path: String
+  release_date: String
+  vote_average: Float
+  isMovie: Boolean
 }
 
 type Query {
-  helloMedia: Media!
+  media: [Media!]!
 }

@@ -1,0 +1,11 @@
+
+type Media {
+  id: Int!
+  name: String!
+  poster_path: String
+  release_date: String
+}
+
+type Query {
+  media: [Media!]
+}

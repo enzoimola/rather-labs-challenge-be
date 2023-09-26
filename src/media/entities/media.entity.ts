@@ -1,8 +1,17 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { IMedia } from '../../models/interfaces/media.interface';
 
 @ObjectType()
 export class Media {
-  @Field((type) => String)
-  media: IMedia['result'];
+  @Field(() => Number)
+  id: number;
+  @Field(() => String)
+  name: string;
+  @Field(() => String, { nullable: true })
+  poster_path: string;
+  @Field(() => String, { nullable: true })
+  release_date: string;
+  @Field(() => Number, { nullable: true })
+  vote_average: number;
+  @Field(() => Boolean, { nullable: true })
+  isMovie: boolean;
 }
