@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FavMedia } from './entities/fav-media.entity';
+import * as admin from 'firebase-admin';
 
 @Injectable()
 export class MediaRepository {
@@ -22,6 +23,18 @@ export class MediaRepository {
 
   async saveFavMedia(media: FavMedia) {
     // debugger;
-    return '';
+    const database = admin.database();
+    const dbRef = database.ref('favorites'); // Replace 'users' with your desired database path
+
+    dbRef
+      .push(media)
+      .then(() => {
+        return console.log('Data added successfully to Firebase.');
+      })
+      .catch((error) => {
+        return console.error('Error adding data to Firebase:', error);
+      });
+    // const firestore = new admin.firestore.Firestore();
+    // (await firestore.collection('/favorites').add(media)
   }
 }
