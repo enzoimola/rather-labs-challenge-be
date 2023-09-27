@@ -22,19 +22,25 @@ export class MediaRepository {
   }
 
   async saveFavMedia(media: FavMedia) {
-    // debugger;
-    const database = admin.database();
-    const dbRef = database.ref('favorites'); // Replace 'users' with your desired database path
+    const id = Object.keys(media)[0];
+    const fav = media[id];
 
-    dbRef
-      .push(media)
-      .then(() => {
-        return console.log('Data added successfully to Firebase.');
-      })
-      .catch((error) => {
-        return console.error('Error adding data to Firebase:', error);
-      });
-    // const firestore = new admin.firestore.Firestore();
-    // (await firestore.collection('/favorites').add(media)
+    const database = admin.database();
+    const dbRef = database.ref('favorites');
+
+    const snapshot = await dbRef.child(id).once('value');
+    const itemExistsInFavorites = snapshot.exists();
+
+    if (fav) {
+      // If the item is marked as a favorite, add it to the favorites collection
+      if (!itemExistsInFavorites) {
+        await dbRef.child(id).set(true);
+      }
+    } else {
+      // If the item is not a favorite, remove it from the favorites collection
+      if (itemExistsInFavorites) {
+        await dbRef.child(id).remove();
+      }
+    }
   }
 }
