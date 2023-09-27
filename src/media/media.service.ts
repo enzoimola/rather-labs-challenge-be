@@ -7,6 +7,7 @@ import { MovieDbResponseResult } from '../models/types/movie-db-response/MovieDb
 import { MediaDbResponseResult } from '../models/types/media-db-response/MediaDbResponseResult.type';
 import { MovieDetailDbResponse } from '../models/types/movie-db-response/MovieDetailDbResponse';
 import { IDetailMedia } from '../models/interfaces/detailMedia.interface';
+import { FavMedia } from './entities/fav-media.entity';
 
 @Injectable()
 export class MediaService {
@@ -50,5 +51,13 @@ export class MediaService {
       : await this.tvService.findById(id);
 
     return data;
+  }
+
+  async addFavoriteMedia(media: FavMedia): Promise<void> {
+    debugger;
+
+    // Implement the logic to add the movie to the list of favorite movies.
+    // For example, you can save it to a database.
+    await this.mediaRepository.saveFavMedia(media);
   }
 }

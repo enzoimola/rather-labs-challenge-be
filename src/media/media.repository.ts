@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { FavMedia } from './entities/fav-media.entity';
 
 @Injectable()
 export class MediaRepository {
@@ -17,5 +18,10 @@ export class MediaRepository {
     const response = await fetch(searchURL, options);
     const json = await response.json();
     return json.results;
+  }
+
+  async saveFavMedia(media: FavMedia) {
+    // debugger;
+    return '';
   }
 }
