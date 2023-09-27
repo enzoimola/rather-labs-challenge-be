@@ -22,9 +22,9 @@ export class TvService {
     return results.map((r: TvDbResponseResult) => ({
       id: r.id,
       name: r.original_name || r.name,
-      poster_path: r.poster_path,
-      release_date: r.release_date,
-      vote_average: r.vote_average,
+      posterPath: r.poster_path,
+      releaseDate: r.release_date,
+      voteAverage: r.vote_average,
       isMovie: false,
     }));
   }
@@ -43,6 +43,7 @@ export class TvService {
       first_air_date,
       vote_average,
       overview,
+      tagline,
     } = result;
 
     return {
@@ -52,6 +53,7 @@ export class TvService {
       releaseDate: first_air_date,
       voteAverage: vote_average,
       overview,
+      tagline,
     };
   }
 }

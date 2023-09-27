@@ -7,11 +7,11 @@ export class Media {
   @Field(() => String)
   name: string;
   @Field(() => String, { nullable: true })
-  poster_path: string;
+  posterPath: string;
   @Field(() => String, { nullable: true })
-  release_date: string;
+  releaseDate: string;
   @Field(() => Number, { nullable: true })
-  vote_average: number;
+  voteAverage: number;
   @Field(() => Boolean, { nullable: true })
   isMovie: boolean;
 }

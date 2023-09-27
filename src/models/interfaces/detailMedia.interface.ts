@@ -20,6 +20,6 @@ export class IDetailMedia {
   voteAverage: number;
   @Field(() => String, { nullable: true })
   overview: string;
-  // @Field(() => Array<>, { nullable: true })
-  // actors: number;
+  @Field(() => String, { nullable: true })
+  tagline: string;
 }

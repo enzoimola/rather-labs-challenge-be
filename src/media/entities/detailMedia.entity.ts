@@ -2,9 +2,9 @@ import { ObjectType, Field } from '@nestjs/graphql';
 
 @ObjectType()
 export class DetailMedia {
-  @Field(() => Number)
+  @Field(() => Number, { nullable: true })
   id: number;
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   name: string;
   @Field(() => String, { nullable: true })
   posterPath: string;
@@ -14,4 +14,6 @@ export class DetailMedia {
   voteAverage: number;
   @Field(() => String, { nullable: true })
   overview: string;
+  @Field(() => String, { nullable: true })
+  tagline: string;
 }

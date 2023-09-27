@@ -36,9 +36,9 @@ export class MediaService {
     const result = results.map((r: MediaDbResponseResult) => ({
       id: r.id,
       name: r.original_title || r.title || r.name || r.original_name,
-      poster_path: r.poster_path,
-      release_date: r.release_date,
-      vote_average: r.vote_average,
+      posterPath: r.poster_path,
+      releaseDate: r.release_date,
+      voteAverage: r.vote_average,
       isMovie: null,
     }));
     return result;

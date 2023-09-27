@@ -21,9 +21,9 @@ export class MovieService {
     return results.map((r: MovieDbResponseResult) => ({
       id: r.id,
       name: r.original_title || r.title,
-      poster_path: r.poster_path,
-      release_date: r.release_date,
-      vote_average: r.vote_average,
+      posterPath: r.poster_path,
+      releaseDate: r.release_date,
+      voteAverage: r.vote_average,
       isMovie: true,
     }));
   }
@@ -45,6 +45,7 @@ export class MovieService {
       release_date,
       vote_average,
       overview,
+      tagline,
     } = result;
 
     return {
@@ -54,6 +55,7 @@ export class MovieService {
       releaseDate: release_date,
       voteAverage: vote_average,
       overview,
+      tagline,
     };
   }
 }
