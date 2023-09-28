@@ -6,4 +6,6 @@ export class FavMedia {
   id: number;
   @Field(() => Boolean, { nullable: true })
   markAsFav: boolean;
+  @Field(() => Boolean, { nullable: true })
+  isMovie: boolean;
 }

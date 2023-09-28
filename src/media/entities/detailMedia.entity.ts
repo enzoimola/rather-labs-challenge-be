@@ -16,4 +16,6 @@ export class DetailMedia {
   overview: string;
   @Field(() => String, { nullable: true })
   tagline: string;
+  @Field(() => String, { nullable: true })
+  homepage: string;
 }

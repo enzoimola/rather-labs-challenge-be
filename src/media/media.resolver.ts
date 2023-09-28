@@ -5,6 +5,7 @@ import { IMedia } from '../models/interfaces/media.interface';
 import { DetailMedia } from './entities/detailMedia.entity';
 import { IDetailMedia } from '../models/interfaces/detailMedia.interface';
 import { FavMedia } from './entities/fav-media.entity';
+import { GetUrlMedia } from './entities/getUrlMedia.entity';
 
 @Resolver(() => Media)
 export class MediaResolver {
@@ -26,8 +27,13 @@ export class MediaResolver {
   }
 
   @Query(() => [FavMedia])
-  async getFavorites(): Promise<Array<FavMedia>> {
+  async getFavorites(): Promise<{ markAsFav: boolean; id: number }[]> {
     const resp = await this.mediaService.getFavorites();
     return resp;
+  }
+
+  @Query(() => [GetUrlMedia])
+  async getURLMedia() {
+    return this.mediaService.getURLMedia();
   }
 }

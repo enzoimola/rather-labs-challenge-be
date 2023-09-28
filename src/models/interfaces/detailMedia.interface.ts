@@ -22,4 +22,6 @@ export class IDetailMedia {
   overview: string;
   @Field(() => String, { nullable: true })
   tagline: string;
+  @Field(() => String, { nullable: true })
+  homepage: string;
 }

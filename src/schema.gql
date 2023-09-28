@@ -5,6 +5,7 @@
 type FavMedia {
   id: Float
   markAsFav: Boolean
+  isMovie: Boolean
 }
 
 type Media {
@@ -24,10 +25,17 @@ type DetailMedia {
   voteAverage: Float
   overview: String
   tagline: String
+  homepage: String
+}
+
+type GetUrlMedia {
+  id: Float
+  homepage: String
 }
 
 type Query {
   media: [Media!]!
   detailMedia(id: Float!, isMovie: Boolean!): DetailMedia!
   getFavorites: [FavMedia!]!
+  getURLMedia: [GetUrlMedia!]!
 }

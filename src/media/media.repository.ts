@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { FavMedia } from './entities/fav-media.entity';
 import * as admin from 'firebase-admin';
+import { ISaveMedia } from '../models/interfaces/save-media.interface';
+import { IMediaGetResponse } from '../models/interfaces/mediaGetResponse.interface';
+import { GetUrlMedia } from './entities/getUrlMedia.entity';
 
 @Injectable()
 export class MediaRepository {
@@ -21,30 +24,40 @@ export class MediaRepository {
     return json.results;
   }
 
-  async saveFavMedia(media: FavMedia) {
+  async saveFavMedia(media: FavMedia): Promise<any> {
     const id = Object.keys(media)[0];
     const fav = media[id];
 
     const database = admin.database();
-    const dbRef = database.ref('favorites');
+    const dbFavRef = database.ref('favorites');
 
-    const snapshot = await dbRef.child(id).once('value');
+    const snapshot = await dbFavRef.child(id).once('value');
+
     const itemExistsInFavorites = snapshot.exists();
+    debugger;
 
     if (fav) {
       // If the item is marked as a favorite, add it to the favorites collection
       if (!itemExistsInFavorites) {
-        await dbRef.child(id).set(true);
+        return await dbFavRef.child(id).set(true);
       }
     } else {
       // If the item is not a favorite, remove it from the favorites collection
       if (itemExistsInFavorites) {
-        await dbRef.child(id).remove();
+        return await dbFavRef.child(id).remove();
       }
     }
   }
 
-  async getFavorites(): Promise<Array<FavMedia>> {
+  async saveMedia(media: ISaveMedia): Promise<any> {
+    const database = admin.database();
+    const dbMediaRef = database.ref('media');
+
+    const resp = await dbMediaRef.child(String(media.id)).set(media.homepage);
+    return resp;
+  }
+
+  async getFavorites(): Promise<{ markAsFav: boolean; id: number }[]> {
     const database = admin.database();
     const favoritesRef = database.ref('favorites');
 
@@ -52,7 +65,7 @@ export class MediaRepository {
     const snapshot = await favoritesRef.once('value');
 
     if (!snapshot.val()) return [];
-    debugger;
+
     // Convert the snapshot to an array of favorite items
     const favoritesData = Object.keys(snapshot.val()).map((id) => ({
       id: parseInt(id, 10),
@@ -60,5 +73,19 @@ export class MediaRepository {
     }));
 
     return favoritesData;
+  }
+
+  async getURLMedia(): Promise<{ id: string; homepage: unknown }[]> {
+    const database = admin.database();
+    const mediaRef = database.ref('media');
+
+    const snapshot = await mediaRef.once('value');
+    const mediaData = snapshot.val() || {};
+
+    // Convert the data to an array of objects
+    return Object.entries(mediaData).map(([id, homepage]) => ({
+      id,
+      homepage,
+    }));
   }
 }

@@ -49,6 +49,7 @@ export class MediaService {
     const data = isMovie
       ? await this.movieService.findById(id)
       : await this.tvService.findById(id);
+    debugger;
 
     return data;
   }
@@ -57,7 +58,11 @@ export class MediaService {
     await this.mediaRepository.saveFavMedia(media);
   }
 
-  async getFavorites(): Promise<Array<FavMedia>> {
+  async getFavorites(): Promise<{ markAsFav: boolean; id: number }[]> {
     return await this.mediaRepository.getFavorites();
+  }
+
+  async getURLMedia(): Promise<{ id: string; homepage: unknown }[]> {
+    return await this.mediaRepository.getURLMedia();
   }
 }

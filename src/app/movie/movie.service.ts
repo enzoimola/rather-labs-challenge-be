@@ -46,6 +46,7 @@ export class MovieService {
       vote_average,
       overview,
       tagline,
+      homepage,
     } = result;
 
     return {
@@ -56,6 +57,7 @@ export class MovieService {
       voteAverage: vote_average,
       overview,
       tagline,
+      homepage,
     };
   }
 }

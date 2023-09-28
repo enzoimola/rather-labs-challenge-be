@@ -44,6 +44,7 @@ export class TvService {
       vote_average,
       overview,
       tagline,
+      homepage,
     } = result;
 
     return {
@@ -54,6 +55,7 @@ export class TvService {
       voteAverage: vote_average,
       overview,
       tagline,
+      homepage,
     };
   }
 }
