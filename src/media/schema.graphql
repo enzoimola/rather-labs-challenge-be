@@ -19,3 +19,12 @@ type Query {
   media: [Media!]
   detailMedia(id: Int, isMovie: Boolean): DetailMediaType!,
 }
+
+type Favorite {
+  id: Int!
+  markAsFav: Boolean!
+}
+
+type Query {
+  favorites: [Favorite!]!
+}

@@ -27,4 +27,9 @@ export class AppController {
   async addFavoriteMovie(@Body() mediaFav: FavMedia): Promise<void> {
     await this.appService.saveFavMedia(mediaFav);
   }
+
+  @Get('get-favorites')
+  async getFavorites(): Promise<any> {
+    await this.appService.getFavorites();
+  }
 }

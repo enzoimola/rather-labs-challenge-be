@@ -54,8 +54,10 @@ export class MediaService {
   }
 
   async addFavoriteMedia(media: FavMedia): Promise<void> {
-    // Implement the logic to add the movie to the list of favorite movies.
-    // For example, you can save it to a database.
     await this.mediaRepository.saveFavMedia(media);
+  }
+
+  async getFavorites(): Promise<Array<FavMedia>> {
+    return await this.mediaRepository.getFavorites();
   }
 }

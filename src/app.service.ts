@@ -23,4 +23,8 @@ export class AppService {
   async saveFavMedia(media: FavMedia): Promise<void> {
     return await this.mediaService.addFavoriteMedia(media);
   }
+
+  async getFavorites(): Promise<Array<FavMedia>> {
+    return await this.mediaService.getFavorites();
+  }
 }

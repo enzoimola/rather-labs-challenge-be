@@ -43,4 +43,22 @@ export class MediaRepository {
       }
     }
   }
+
+  async getFavorites(): Promise<Array<FavMedia>> {
+    const database = admin.database();
+    const favoritesRef = database.ref('favorites');
+
+    // Retrieve the entire "favorites" collection
+    const snapshot = await favoritesRef.once('value');
+
+    if (!snapshot.val()) return [];
+    debugger;
+    // Convert the snapshot to an array of favorite items
+    const favoritesData = Object.keys(snapshot.val()).map((id) => ({
+      id: parseInt(id, 10),
+      markAsFav: true,
+    }));
+
+    return favoritesData;
+  }
 }

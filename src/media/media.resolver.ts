@@ -1,9 +1,10 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args } from '@nestjs/graphql';
 import { MediaService } from './media.service';
 import { Media } from './entities/media.entity';
 import { IMedia } from '../models/interfaces/media.interface';
 import { DetailMedia } from './entities/detailMedia.entity';
 import { IDetailMedia } from '../models/interfaces/detailMedia.interface';
+import { FavMedia } from './entities/fav-media.entity';
 
 @Resolver(() => Media)
 export class MediaResolver {
@@ -24,28 +25,9 @@ export class MediaResolver {
     return resp;
   }
 
-  // @Mutation(() => Media)
-  // createMedia(@Args('createMediaInput') createMediaInput: CreateMediaInput) {
-  //   return this.mediaService.create(createMediaInput);
-  // }
-  //
-  // @Query(() => [Media], { name: 'media' })
-  // findAll() {
-  //   return this.mediaService.findAll();
-  // }
-  //
-  // @Query(() => Media, { name: 'media' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.mediaService.findOne(id);
-  // }
-  //
-  // @Mutation(() => Media)
-  // updateMedia(@Args('updateMediaInput') updateMediaInput: UpdateMediaInput) {
-  //   return this.mediaService.update(updateMediaInput.id, updateMediaInput);
-  // }
-  //
-  // @Mutation(() => Media)
-  // removeMedia(@Args('id', { type: () => Int }) id: number) {
-  //   return this.mediaService.remove(id);
-  // }
+  @Query(() => [FavMedia])
+  async getFavorites(): Promise<Array<FavMedia>> {
+    const resp = await this.mediaService.getFavorites();
+    return resp;
+  }
 }

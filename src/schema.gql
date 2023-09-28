@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type FavMedia {
+  id: Float
+  markAsFav: Boolean
+}
+
 type Media {
   id: Float!
   name: String!
@@ -24,4 +29,5 @@ type DetailMedia {
 type Query {
   media: [Media!]!
   detailMedia(id: Float!, isMovie: Boolean!): DetailMedia!
+  getFavorites: [FavMedia!]!
 }
