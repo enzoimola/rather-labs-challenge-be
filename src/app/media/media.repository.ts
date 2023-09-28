@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { FavMedia } from './entities/fav-media.entity';
 import * as admin from 'firebase-admin';
-import { ISaveMedia } from '../models/interfaces/save-media.interface';
-import { IMediaGetResponse } from '../models/interfaces/mediaGetResponse.interface';
+import { ISaveMedia } from '../../models/interfaces/save-media.interface';
+import { IMediaGetResponse } from '../../models/interfaces/mediaGetResponse.interface';
 import { GetUrlMedia } from './entities/getUrlMedia.entity';
 
 @Injectable()
@@ -34,7 +34,6 @@ export class MediaRepository {
     const snapshot = await dbFavRef.child(id).once('value');
 
     const itemExistsInFavorites = snapshot.exists();
-    debugger;
 
     if (fav) {
       // If the item is marked as a favorite, add it to the favorites collection

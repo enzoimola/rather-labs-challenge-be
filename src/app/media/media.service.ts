@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { MovieService } from '../app/movie/movie.service';
-import { TvService } from '../app/tv/tv.service';
-import { IMedia } from '../models/interfaces/media.interface';
+import { MovieService } from '../movie/movie.service';
+import { TvService } from '../tv/tv.service';
+import { IMedia } from '../../models/interfaces/media.interface';
 import { MediaRepository } from './media.repository';
-import { MovieDbResponseResult } from '../models/types/movie-db-response/MovieDbResponseResult.type';
-import { MediaDbResponseResult } from '../models/types/media-db-response/MediaDbResponseResult.type';
-import { MovieDetailDbResponse } from '../models/types/movie-db-response/MovieDetailDbResponse';
-import { IDetailMedia } from '../models/interfaces/detailMedia.interface';
+import { MovieDbResponseResult } from '../../models/types/movie-db-response/MovieDbResponseResult.type';
+import { MediaDbResponseResult } from '../../models/types/media-db-response/MediaDbResponseResult.type';
+import { IDetailMedia } from '../../models/interfaces/detailMedia.interface';
 import { FavMedia } from './entities/fav-media.entity';
 
 @Injectable()

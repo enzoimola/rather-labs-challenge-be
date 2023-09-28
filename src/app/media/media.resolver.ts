@@ -1,9 +1,9 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 import { MediaService } from './media.service';
 import { Media } from './entities/media.entity';
-import { IMedia } from '../models/interfaces/media.interface';
+import { IMedia } from '../../models/interfaces/media.interface';
 import { DetailMedia } from './entities/detailMedia.entity';
-import { IDetailMedia } from '../models/interfaces/detailMedia.interface';
+import { IDetailMedia } from '../../models/interfaces/detailMedia.interface';
 import { FavMedia } from './entities/fav-media.entity';
 import { GetUrlMedia } from './entities/getUrlMedia.entity';
 

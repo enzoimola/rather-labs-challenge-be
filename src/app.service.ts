@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { MediaService } from './media/media.service';
+import { MediaService } from './app/media/media.service';
 import { IMedia } from './models/interfaces/media.interface';
 import { IDetailMedia } from './models/interfaces/detailMedia.interface';
-import { FavMedia } from './media/entities/fav-media.entity';
+import { FavMedia } from './app/media/entities/fav-media.entity';
 
 @Injectable()
 export class AppService {

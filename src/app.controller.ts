@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { IMedia } from './models/interfaces/media.interface';
 import { IDetailMedia } from './models/interfaces/detailMedia.interface';
-import { FavMedia } from './media/entities/fav-media.entity';
+import { FavMedia } from './app/media/entities/fav-media.entity';
 
 @Controller()
 export class AppController {
