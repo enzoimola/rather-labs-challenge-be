@@ -19,8 +19,8 @@ export class AppService {
     return await this.userService.create(input);
   }
 
-  async checkUser(userId: string): Promise<IResponse> {
-    return await this.userService.checkUserExists(userId);
+  async getUser(userId: string): Promise<any> {
+    return await this.userService.getUser(userId);
   }
 
   async findAll(): Promise<Array<IMedia>> {

@@ -1,11 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
-import { MovieService } from '../movie/movie.service';
-import { TvService } from '../tv/tv.service';
-import { MediaRepository } from '../media/media.repository';
 import { UserRepository } from './user.repository';
-import { ICreateUserResponse } from '../../models/interfaces/user/createUserResponse.interface';
 import { IResponse } from '../../models/interfaces/IResponse.interface';
 
 @Injectable()
@@ -16,9 +12,8 @@ export class UserService {
     return createdUser;
   }
 
-  async checkUserExists(email: string): Promise<IResponse> {
-    const createdUser = await this.userRepository.userExists(email);
-    return createdUser;
+  async getUser(email: string): Promise<any> {
+    return await this.userRepository.getUser(email);
   }
 
   findAll() {

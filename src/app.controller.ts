@@ -17,9 +17,9 @@ export class AppController {
     return await this.appService.createUser(input);
   }
 
-  @Get(':email')
-  async checkUser(@Param() email: string): Promise<ICreateUserResponse> {
-    return await this.appService.checkUser(email);
+  @Get('/user/:uid')
+  async getUser(@Param('uid') uid: string): Promise<any> {
+    return await this.appService.getUser(uid);
   }
 
   @Get()

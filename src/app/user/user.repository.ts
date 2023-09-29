@@ -7,19 +7,14 @@ import { IResponse } from '../../models/interfaces/IResponse.interface';
 @Injectable()
 export class UserRepository {
   async create(input: CreateUserInput): Promise<IResponse> {
+    const { uid, email, password } = input;
     const database = admin.database();
-    const dbUserRef = database.ref('users');
+    const dbUserRef = database.ref(`users/${uid}`);
+
     let response: IResponse = { code: null, success: null };
+    const user = { email, password };
 
-    const user = {
-      uid: input.uid,
-      email: input.email,
-      password: input.password,
-    };
-
-    const newUserRef = dbUserRef.push();
-
-    newUserRef
+    dbUserRef
       .set(user)
       .then(() => {
         response = { code: 200, success: true };
@@ -30,22 +25,15 @@ export class UserRepository {
     return response;
   }
 
-  async userExists(email): Promise<IResponse> {
-    const database = admin.database();
-    const dbUserRef = database.ref(`users`);
-    let response: IResponse = { code: null, success: null };
+  async getUser(uid: string): Promise<any> {
+    const dbUserRef = admin.database().ref(`users`);
 
     try {
-      const snapshot = await dbUserRef
-        .orderByChild('email')
-        .equalTo(email.email)
-        .once('value');
-      const exist = snapshot.exists();
-      response = {
-        code: exist ? 200 : 404,
-        success: exist,
-      };
-      return response;
+      const snapshot = await dbUserRef.child(uid).get();
+      if (snapshot.exists()) {
+        const { email } = snapshot.val();
+        return { email, uid };
+      }
     } catch (error) {
       throw new Error(
         'Error checking user existence in Firebase: ' + error.message,
