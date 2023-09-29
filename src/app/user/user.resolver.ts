@@ -3,14 +3,25 @@ import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { ICreateUserResponse } from '../../models/interfaces/user/createUserResponse.interface';
+import { IResponse } from '../../models/interfaces/IResponse.interface';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Mutation(() => User)
-  createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-    return this.userService.create(createUserInput);
+  async createUser(
+    @Args('input') input: CreateUserInput,
+  ): Promise<ICreateUserResponse> {
+    const createdUser = await this.userService.create(input);
+    return createdUser;
+  }
+
+  @Query(() => User)
+  async checkUserExists(@Args('email') email: string): Promise<IResponse> {
+    const userExists = await this.userService.checkUserExists(email);
+    return userExists;
   }
 
   @Query(() => [User], { name: 'user' })

@@ -1,12 +1,26 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { IMedia } from './models/interfaces/media.interface';
 import { IDetailMedia } from './models/interfaces/detailMedia.interface';
 import { FavMedia } from './app/media/entities/fav-media.entity';
+import { CreateUserInput } from './app/user/dto/create-user.input';
+import { ICreateUserResponse } from './models/interfaces/user/createUserResponse.interface';
 
-@Controller()
+@Controller('')
 export class AppController {
   constructor(private readonly appService: AppService) {}
+
+  @Post('create-user')
+  async createUser(
+    @Body() input: CreateUserInput,
+  ): Promise<ICreateUserResponse> {
+    return await this.appService.createUser(input);
+  }
+
+  @Get(':email')
+  async checkUser(@Param() email: string): Promise<ICreateUserResponse> {
+    return await this.appService.checkUser(email);
+  }
 
   @Get()
   getHello(): Promise<Array<IMedia>> {

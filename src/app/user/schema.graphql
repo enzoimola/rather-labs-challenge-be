@@ -1,0 +1,9 @@
+
+type User {
+  email: String!
+  password: String!
+}
+
+type Query {
+  login: User!
+}

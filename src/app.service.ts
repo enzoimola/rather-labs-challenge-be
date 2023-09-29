@@ -3,10 +3,25 @@ import { MediaService } from './app/media/media.service';
 import { IMedia } from './models/interfaces/media.interface';
 import { IDetailMedia } from './models/interfaces/detailMedia.interface';
 import { FavMedia } from './app/media/entities/fav-media.entity';
+import { CreateUserInput } from './app/user/dto/create-user.input';
+import { ICreateUserResponse } from './models/interfaces/user/createUserResponse.interface';
+import { UserService } from './app/user/user.service';
+import { IResponse } from './models/interfaces/IResponse.interface';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly mediaService: MediaService) {}
+  constructor(
+    private readonly mediaService: MediaService,
+    private readonly userService: UserService,
+  ) {}
+
+  async createUser(input: CreateUserInput): Promise<ICreateUserResponse> {
+    return await this.userService.create(input);
+  }
+
+  async checkUser(userId: string): Promise<IResponse> {
+    return await this.userService.checkUserExists(userId);
+  }
 
   async findAll(): Promise<Array<IMedia>> {
     return await this.mediaService.fetchMedia();

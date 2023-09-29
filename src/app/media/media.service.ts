@@ -48,7 +48,6 @@ export class MediaService {
     const data = isMovie
       ? await this.movieService.findById(id)
       : await this.tvService.findById(id);
-    debugger;
 
     return data;
   }

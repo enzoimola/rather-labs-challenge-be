@@ -34,8 +34,8 @@ type GetUrlMedia {
 }
 
 type User {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  email: String!
+  password: String!
 }
 
 type Query {
@@ -43,22 +43,23 @@ type Query {
   detailMedia(id: Float!, isMovie: Boolean!): DetailMedia!
   getFavorites: [FavMedia!]!
   getURLMedia: [GetUrlMedia!]!
+  checkUserExists(email: String!): User!
   user(id: Int!): User!
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
+  createUser(input: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
 }
 
 input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  email: String!
+  password: String!
 }
 
 input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  email: String
+  password: String
   id: Int!
 }
