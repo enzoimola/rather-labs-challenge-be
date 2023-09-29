@@ -12,6 +12,7 @@ export class UserRepository {
     let response: IResponse = { code: null, success: null };
 
     const user = {
+      uid: input.uid,
       email: input.email,
       password: input.password,
     };

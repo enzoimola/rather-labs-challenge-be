@@ -4,6 +4,7 @@
 
 type FavMedia {
   id: Float
+  uid: String!
   markAsFav: Boolean
   isMovie: Boolean
 }
@@ -54,11 +55,13 @@ type Mutation {
 }
 
 input CreateUserInput {
+  uid: String!
   email: String!
   password: String!
 }
 
 input UpdateUserInput {
+  uid: String
   email: String
   password: String
   id: Int!

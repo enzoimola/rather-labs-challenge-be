@@ -4,6 +4,7 @@ import * as admin from 'firebase-admin';
 import { ISaveMedia } from '../../models/interfaces/save-media.interface';
 import { IMediaGetResponse } from '../../models/interfaces/mediaGetResponse.interface';
 import { GetUrlMedia } from './entities/getUrlMedia.entity';
+import { IResponse } from '../../models/interfaces/IResponse.interface';
 
 @Injectable()
 export class MediaRepository {
@@ -24,27 +25,29 @@ export class MediaRepository {
     return json.results;
   }
 
-  async saveFavMedia(media: FavMedia): Promise<any> {
-    const id = Object.keys(media)[0];
-    const fav = media[id];
-
+  async saveFavMedia(media: FavMedia): Promise<boolean> {
     const database = admin.database();
     const dbFavRef = database.ref('favorites');
 
-    const snapshot = await dbFavRef.child(id).once('value');
+    try {
+      const snapshot = await dbFavRef.child(String(media.id)).once('value');
+      const itemExistsInFavorites = snapshot.exists();
 
-    const itemExistsInFavorites = snapshot.exists();
-
-    if (fav) {
-      // If the item is marked as a favorite, add it to the favorites collection
-      if (!itemExistsInFavorites) {
-        return await dbFavRef.child(id).set(true);
+      if (media.markAsFav) {
+        // If the item is marked as a favorite, add it to the favorites collection
+        if (!itemExistsInFavorites) {
+          await dbFavRef.child(String(media.id)).set(media);
+        }
+      } else {
+        // If the item is not a favorite, remove it from the favorites collection if it exists
+        if (itemExistsInFavorites) {
+          await dbFavRef.child(String(media.id)).remove();
+        }
       }
-    } else {
-      // If the item is not a favorite, remove it from the favorites collection
-      if (itemExistsInFavorites) {
-        return await dbFavRef.child(id).remove();
-      }
+      return true;
+    } catch (error) {
+      throw Error(error);
+      return false;
     }
   }
 
