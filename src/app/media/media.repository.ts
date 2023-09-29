@@ -5,6 +5,7 @@ import { ISaveMedia } from '../../models/interfaces/save-media.interface';
 import { IMediaGetResponse } from '../../models/interfaces/mediaGetResponse.interface';
 import { GetUrlMedia } from './entities/getUrlMedia.entity';
 import { IResponse } from '../../models/interfaces/IResponse.interface';
+import { Media } from './entities/media.entity';
 
 @Injectable()
 export class MediaRepository {
@@ -27,23 +28,13 @@ export class MediaRepository {
 
   async saveFavMedia(media: FavMedia): Promise<boolean> {
     const database = admin.database();
-    const dbFavRef = database.ref('favorites');
+    const { uid, id } = media;
+
+    const dbFavRef = database.ref(`favorites/${uid}`);
+    const newUserRef = dbFavRef.push();
 
     try {
-      const snapshot = await dbFavRef.child(String(media.id)).once('value');
-      const itemExistsInFavorites = snapshot.exists();
-
-      if (media.markAsFav) {
-        // If the item is marked as a favorite, add it to the favorites collection
-        if (!itemExistsInFavorites) {
-          await dbFavRef.child(String(media.id)).set(media);
-        }
-      } else {
-        // If the item is not a favorite, remove it from the favorites collection if it exists
-        if (itemExistsInFavorites) {
-          await dbFavRef.child(String(media.id)).remove();
-        }
-      }
+      await newUserRef.set(id);
       return true;
     } catch (error) {
       throw Error(error);
@@ -59,22 +50,22 @@ export class MediaRepository {
     return resp;
   }
 
-  async getFavorites(): Promise<{ markAsFav: boolean; id: number }[]> {
+  async getFavorites(uid: string): Promise<any> {
     const database = admin.database();
-    const favoritesRef = database.ref('favorites');
+    const favoritesRef = database.ref(`favorites/${uid}`);
 
-    // Retrieve the entire "favorites" collection
-    const snapshot = await favoritesRef.once('value');
+    try {
+      const snapshot = await favoritesRef.once('value');
 
-    if (!snapshot.val()) return [];
+      const favoritesData: Array<Partial<Media>> = Object.values(
+        snapshot.val(),
+      ).map((id: number) => ({ id }));
 
-    // Convert the snapshot to an array of favorite items
-    const favoritesData = Object.keys(snapshot.val()).map((id) => ({
-      id: parseInt(id, 10),
-      markAsFav: true,
-    }));
-
-    return favoritesData;
+      return favoritesData;
+    } catch (error) {
+      throw Error(error);
+      return [];
+    }
   }
 
   async getURLMedia(): Promise<{ id: string; homepage: unknown }[]> {

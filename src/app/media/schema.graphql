@@ -22,7 +22,6 @@ type Query {
 
 type Favorite {
   id: Int!
-  markAsFav: Boolean!
 }
 
 type Query {

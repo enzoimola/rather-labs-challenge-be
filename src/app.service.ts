@@ -39,7 +39,7 @@ export class AppService {
     return await this.mediaService.addFavoriteMedia(media);
   }
 
-  async getFavorites(): Promise<{ markAsFav: boolean; id: number }[]> {
-    return await this.mediaService.getFavorites();
+  async getFavorites(uid: string): Promise<any> {
+    return await this.mediaService.getFavorites(uid);
   }
 }

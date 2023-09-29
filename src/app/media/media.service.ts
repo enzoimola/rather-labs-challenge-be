@@ -56,8 +56,8 @@ export class MediaService {
     await this.mediaRepository.saveFavMedia(media);
   }
 
-  async getFavorites(): Promise<{ markAsFav: boolean; id: number }[]> {
-    return await this.mediaRepository.getFavorites();
+  async getFavorites(uid: string): Promise<any> {
+    return await this.mediaRepository.getFavorites(uid);
   }
 
   async getURLMedia(): Promise<{ id: string; homepage: unknown }[]> {

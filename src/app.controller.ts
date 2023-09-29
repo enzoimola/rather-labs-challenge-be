@@ -37,13 +37,13 @@ export class AppController {
     return this.appService.findById(215103, true);
   }
 
-  @Post('save')
+  @Post('add-favorite')
   async addFavoriteMovie(@Body() mediaFav: FavMedia): Promise<void> {
     await this.appService.saveFavMedia(mediaFav);
   }
 
-  @Get('get-favorites')
-  async getFavorites(): Promise<any> {
-    await this.appService.getFavorites();
+  @Get('/user/:uid/fav')
+  async getFavorites(@Param('uid') uid: string): Promise<any> {
+    await this.appService.getFavorites(uid);
   }
 }

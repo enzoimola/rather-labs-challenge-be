@@ -11,8 +11,8 @@ export class MediaFavController {
     await this.mediaService.addFavoriteMedia(mediaFav);
   }
 
-  @Get('get-favorites')
-  async getFavorites() {
-    return await this.mediaService.getFavorites();
-  }
+  // @Get('get-favorites')
+  // async getFavorites() {
+  //   return await this.mediaService.getFavorites();
+  // }
 }

@@ -27,8 +27,10 @@ export class MediaResolver {
   }
 
   @Query(() => [FavMedia])
-  async getFavorites(): Promise<{ markAsFav: boolean; id: number }[]> {
-    const resp = await this.mediaService.getFavorites();
+  async getFavorites(
+    @Args('uid', { type: () => String }) uid: string,
+  ): Promise<any> {
+    const resp = await this.mediaService.getFavorites(uid);
     return resp;
   }
 
