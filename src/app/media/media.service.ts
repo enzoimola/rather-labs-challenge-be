@@ -5,8 +5,8 @@ import { IMedia } from '../../models/interfaces/media.interface';
 import { MediaRepository } from './media.repository';
 import { MovieDbResponseResult } from '../../models/types/movie-db-response/MovieDbResponseResult.type';
 import { MediaDbResponseResult } from '../../models/types/media-db-response/MediaDbResponseResult.type';
-import { IDetailMedia } from '../../models/interfaces/detailMedia.interface';
 import { FavMedia } from './entities/fav-media.entity';
+import { DetailMedia } from './entities/detailMedia.entity';
 
 @Injectable()
 export class MediaService {
@@ -27,7 +27,9 @@ export class MediaService {
   async findSearch(search: string) {
     const results: Array<MovieDbResponseResult> =
       await this.mediaRepository.findSearch(search);
-    return this.mediaDbResultToMediaParser(results);
+    const result = this.mediaDbResultToMediaParser(results);
+    debugger;
+    return result;
   }
 
   mediaDbResultToMediaParser(
@@ -44,7 +46,7 @@ export class MediaService {
     return result;
   }
 
-  async fetchFindBy(id: number, isMovie: boolean): Promise<IDetailMedia> {
+  async fetchFindBy(id: number, isMovie: boolean): Promise<DetailMedia> {
     const data = isMovie
       ? await this.movieService.findById(id)
       : await this.tvService.findById(id);

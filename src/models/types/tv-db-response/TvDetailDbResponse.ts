@@ -1,52 +1,3 @@
-export type IGenres = {
-  id: number;
-  name: string;
-};
-
-export type IProductionCompanies = {
-  id: number;
-  logo_path: string;
-  name: string;
-  origin_country: string;
-};
-
-export type ISpokenLanguages = {
-  english_name: string;
-  iso_639_1: string;
-  name: string;
-};
-
-export type CreatedBy = {
-  id: number;
-  credit_id: string;
-  name: string;
-  gender: number;
-  profile_path: string;
-};
-
-export type INetworks = {
-  id: number;
-  logo_path: string;
-  name: string;
-  origin_country: string;
-};
-
-export type IProductionCountries = {
-  iso_3166_1: string;
-  name: string;
-};
-
-export type ISeasons = {
-  air_date: string;
-  episode_count: number;
-  id: number;
-  name: string;
-  overview: string;
-  poster_path: string;
-  season_number: number;
-  vote_average: number;
-};
-
 export type TvDetailDbResponse = {
   adult: string;
   backdrop_path: string;
@@ -108,4 +59,72 @@ export type TvDetailDbResponse = {
   type: string;
   vote_average: number;
   vote_count: number;
+  credits: any;
+};
+
+export type IGenres = {
+  id: number;
+  name: string;
+};
+
+export type IProductionCompanies = {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+};
+
+export type ISpokenLanguages = {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+};
+
+export type CreatedBy = {
+  id: number;
+  credit_id: string;
+  name: string;
+  gender: number;
+  profile_path: string;
+};
+
+export type INetworks = {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+};
+
+export type IProductionCountries = {
+  iso_3166_1: string;
+  name: string;
+};
+
+export type ISeasons = {
+  air_date: string;
+  episode_count: number;
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  season_number: number;
+  vote_average: number;
+};
+
+export type ICredits = {
+  cast: Array<ICast>;
+};
+
+export type ICast = {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  character: string;
+  credit_id: string;
+  order: number;
 };

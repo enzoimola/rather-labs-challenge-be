@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { IMedia } from './models/interfaces/media.interface';
-import { IDetailMedia } from './models/interfaces/detailMedia.interface';
 import { FavMedia } from './app/media/entities/fav-media.entity';
 import { CreateUserInput } from './app/user/dto/create-user.input';
 import { ICreateUserResponse } from './models/interfaces/user/createUserResponse.interface';
+import { DetailMedia } from './app/media/entities/detailMedia.entity';
 
 @Controller('')
 export class AppController {
@@ -32,9 +32,12 @@ export class AppController {
     return this.appService.findSearch('batman');
   }
 
-  @Get('/findById')
-  getById(): Promise<IDetailMedia> {
-    return this.appService.findById(215103, true);
+  @Get('/findById/:id/:isMovie')
+  getById(
+    @Param('id') id: number,
+    @Param('isMovie') isMovie: boolean,
+  ): Promise<DetailMedia> {
+    return this.appService.findById(id, isMovie);
   }
 
   @Post('add-favorite')

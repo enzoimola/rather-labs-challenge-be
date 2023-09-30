@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { MovieDbResponseResult } from '../../models/types/movie-db-response/MovieDbResponseResult.type';
 import { MovieRepository } from './movie.repository';
 import { IMedia } from '../../models/interfaces/media.interface';
-import { IDetailMedia } from '../../models/interfaces/detailMedia.interface';
 import { MovieDetailDbResponse } from '../../models/types/movie-db-response/MovieDetailDbResponse';
+import { DetailMedia } from '../media/entities/detailMedia.entity';
 
 @Injectable()
 export class MovieService {
@@ -28,15 +28,13 @@ export class MovieService {
     }));
   }
 
-  async findById(id: number): Promise<IDetailMedia> {
+  async findById(id: number): Promise<DetailMedia> {
     const result: MovieDetailDbResponse =
       await this.movieRepository.findById(id);
     return this.movieDetailDbResultToMediaParser(result);
   }
 
-  movieDetailDbResultToMediaParser(
-    result: MovieDetailDbResponse,
-  ): IDetailMedia {
+  movieDetailDbResultToMediaParser(result: MovieDetailDbResponse): DetailMedia {
     const {
       id,
       original_title,
@@ -47,7 +45,19 @@ export class MovieService {
       overview,
       tagline,
       homepage,
+      credits,
     } = result;
+
+    const { cast } = credits;
+
+    const actors = cast.map((actor) => ({
+      id: actor.credit_id,
+      name: actor.name,
+      character: actor.character,
+      knowForDepartment: actor.known_for_department,
+      popularity: actor.popularity,
+      profilePath: actor.profile_path,
+    }));
 
     return {
       id,
@@ -58,6 +68,7 @@ export class MovieService {
       overview,
       tagline,
       homepage,
+      actors,
     };
   }
 }

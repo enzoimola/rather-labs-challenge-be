@@ -9,7 +9,6 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 export class IDetailMedia {
   @Field(() => Int)
   id: number;
-
   @Field(() => String)
   name: string;
   @Field(() => String, { nullable: true })

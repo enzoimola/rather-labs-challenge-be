@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { MovieDbResponse } from '../../models/types/movie-db-response/MovieDbResponse';
 import { MovieDbResponseResult } from '../../models/types/movie-db-response/MovieDbResponseResult.type';
 import { MovieDetailDbResponse } from '../../models/types/movie-db-response/MovieDetailDbResponse';
 
@@ -27,7 +26,7 @@ export class MovieRepository {
   }
 
   async findById(id: number): Promise<MovieDetailDbResponse> {
-    const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+    const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US&append_to_response=credits`;
 
     const options = {
       method: 'GET',

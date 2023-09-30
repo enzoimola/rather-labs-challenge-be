@@ -4,8 +4,7 @@ import { TvRepository } from './tv.repository';
 import { TvDbResponseResult } from '../../models/types/tv-db-response/TvDbResponseResult.type';
 import { IMedia } from '../../models/interfaces/media.interface';
 import { TvDetailDbResponse } from '../../models/types/tv-db-response/TvDetailDbResponse';
-import { MovieDetailDbResponse } from '../../models/types/movie-db-response/MovieDetailDbResponse';
-import { IDetailMedia } from '../../models/interfaces/detailMedia.interface';
+import { DetailMedia } from '../media/entities/detailMedia.entity';
 
 @Injectable()
 export class TvService {
@@ -29,12 +28,12 @@ export class TvService {
     }));
   }
 
-  async findById(id: number): Promise<IDetailMedia> {
+  async findById(id: number): Promise<DetailMedia> {
     const result: TvDetailDbResponse = await this.tvRepository.findById(id);
     return this.tvDetailDbResultToMediaParser(result);
   }
 
-  tvDetailDbResultToMediaParser(result: TvDetailDbResponse): IDetailMedia {
+  tvDetailDbResultToMediaParser(result: TvDetailDbResponse): DetailMedia {
     const {
       id,
       original_name,
@@ -45,7 +44,19 @@ export class TvService {
       overview,
       tagline,
       homepage,
+      credits,
     } = result;
+
+    const { cast } = credits;
+
+    const actors = cast.map((actor) => ({
+      id: actor.credit_id,
+      name: actor.name,
+      character: actor.character,
+      knowForDepartment: actor.known_for_department,
+      popularity: actor.popularity,
+      profilePath: actor.profile_path,
+    }));
 
     return {
       id,
@@ -56,6 +67,7 @@ export class TvService {
       overview,
       tagline,
       homepage,
+      actors,
     };
   }
 }

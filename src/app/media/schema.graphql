@@ -13,6 +13,7 @@ type DetailMediaType {
   releaseDate: String
   voteAverage: Int
   overview: String
+  actors: [CastMemberEntity]
 }
 
 type Query {

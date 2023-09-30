@@ -7,6 +7,7 @@ import { CreateUserInput } from './app/user/dto/create-user.input';
 import { ICreateUserResponse } from './models/interfaces/user/createUserResponse.interface';
 import { UserService } from './app/user/user.service';
 import { IResponse } from './models/interfaces/IResponse.interface';
+import { DetailMedia } from './app/media/entities/detailMedia.entity';
 
 @Injectable()
 export class AppService {
@@ -31,7 +32,7 @@ export class AppService {
     return await this.mediaService.findSearch(search);
   }
 
-  async findById(id: number, isMovie: boolean): Promise<IDetailMedia> {
+  async findById(id: number, isMovie: boolean): Promise<DetailMedia> {
     return await this.mediaService.fetchFindBy(id, isMovie);
   }
 

@@ -1,4 +1,4 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 
 @ObjectType()
 export class DetailMedia {
@@ -18,4 +18,26 @@ export class DetailMedia {
   tagline: string;
   @Field(() => String, { nullable: true })
   homepage: string;
+  @Field(() => [CastMemberEntity], { nullable: true })
+  actors: CastMemberEntity[];
+}
+
+@ObjectType()
+export class CastMemberEntity {
+  @Field(() => ID, { nullable: true })
+  id: string;
+
+  @Field(() => String, { nullable: true })
+  name: string;
+
+  @Field(() => String, { nullable: true })
+  character: string;
+
+  @Field(() => String, { nullable: true })
+  knowForDepartment: string;
+
+  @Field(() => Number, { nullable: true })
+  popularity: number;
+  @Field(() => String, { nullable: true })
+  profilePath: string;
 }

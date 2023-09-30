@@ -26,6 +26,16 @@ type DetailMedia {
   overview: String
   tagline: String
   homepage: String
+  actors: [CastMemberEntity!]
+}
+
+type CastMemberEntity {
+  id: ID
+  name: String
+  character: String
+  knowForDepartment: String
+  popularity: Float
+  profilePath: String
 }
 
 type GetUrlMedia {

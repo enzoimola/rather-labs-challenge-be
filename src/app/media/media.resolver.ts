@@ -3,7 +3,6 @@ import { MediaService } from './media.service';
 import { Media } from './entities/media.entity';
 import { IMedia } from '../../models/interfaces/media.interface';
 import { DetailMedia } from './entities/detailMedia.entity';
-import { IDetailMedia } from '../../models/interfaces/detailMedia.interface';
 import { FavMedia } from './entities/fav-media.entity';
 import { GetUrlMedia } from './entities/getUrlMedia.entity';
 
@@ -21,7 +20,7 @@ export class MediaResolver {
   async detailMedia(
     @Args('id', { type: () => Number }) id: number,
     @Args('isMovie', { type: () => Boolean }) isMovie: boolean,
-  ): Promise<IDetailMedia> {
+  ): Promise<DetailMedia> {
     const resp = await this.mediaService.fetchFindBy(id, isMovie);
     return resp;
   }
