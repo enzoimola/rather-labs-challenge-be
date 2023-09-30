@@ -5,6 +5,7 @@
 type FavMedia {
   id: Float
   uid: String!
+  isFav: Boolean!
 }
 
 type Media {
@@ -37,12 +38,17 @@ type User {
   password: String!
 }
 
+type UserResponse {
+  uid: String!
+  email: String!
+}
+
 type Query {
   media: [Media!]!
   detailMedia(id: Float!, isMovie: Boolean!): DetailMedia!
   getFavorites(uid: String!): [FavMedia!]!
   getURLMedia: [GetUrlMedia!]!
-  checkUserExists(email: String!): User!
+  getUser(uid: String!): UserResponse!
   user(id: Int!): User!
 }
 

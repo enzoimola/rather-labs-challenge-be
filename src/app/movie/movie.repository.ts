@@ -17,10 +17,13 @@ export class MovieRepository {
           'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MTYwMzZlNTAxMjQxMzdiOWMzNjYyZjM0MTViMTFkZSIsInN1YiI6IjY1MGQ4MDFlOTNkYjkyMDEzOGU1MzhkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.keetD6EUEkRf5FK-JbfJIyF-C4-VwyieHnNk__jPZn8',
       },
     };
-
-    const response = await fetch(url, options);
-    const json = await response.json();
-    return json.results;
+    try {
+      const response = await fetch(url, options);
+      const json = await response.json();
+      return json.results;
+    } catch (e) {
+      throw new Error('Error fetching movies: ' + e.message);
+    }
   }
 
   async findById(id: number): Promise<MovieDetailDbResponse> {
@@ -35,9 +38,12 @@ export class MovieRepository {
       },
     };
 
-    const response = await fetch(url, options);
-    const json = await response.json();
-
-    return json;
+    try {
+      const response = await fetch(url, options);
+      const json = await response.json();
+      return json;
+    } catch (e) {
+      throw new Error('Error fetching movies: ' + e.message);
+    }
   }
 }

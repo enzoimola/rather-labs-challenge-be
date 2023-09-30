@@ -30,6 +30,7 @@ export class UserRepository {
 
     try {
       const snapshot = await dbUserRef.child(uid).get();
+
       if (snapshot.exists()) {
         const { email } = snapshot.val();
         return { email, uid };

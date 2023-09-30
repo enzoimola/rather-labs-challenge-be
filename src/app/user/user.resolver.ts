@@ -5,6 +5,7 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { ICreateUserResponse } from '../../models/interfaces/user/createUserResponse.interface';
 import { IResponse } from '../../models/interfaces/IResponse.interface';
+import { UserResponse } from './entities/userResponse.entity';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -17,9 +18,9 @@ export class UserResolver {
     return await this.userService.create(input);
   }
 
-  @Query(() => User)
-  async checkUserExists(@Args('email') email: string): Promise<IResponse> {
-    return await this.userService.getUser(email);
+  @Query(() => UserResponse)
+  async getUser(@Args('uid') uid: string): Promise<IResponse> {
+    return await this.userService.getUser(uid);
   }
 
   @Query(() => [User], { name: 'user' })

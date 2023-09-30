@@ -34,8 +34,14 @@ export class MediaRepository {
     const newUserRef = dbFavRef.push();
 
     try {
-      await newUserRef.set(id);
-      return true;
+      if (!media.isFav) {
+        // await newUserRef.set(id);
+        await dbFavRef.child(String(id)).set(true);
+        return true;
+      } else {
+        await dbFavRef.child(String(id)).remove();
+        return false;
+      }
     } catch (error) {
       throw Error(error);
       return false;
@@ -56,12 +62,15 @@ export class MediaRepository {
 
     try {
       const snapshot = await favoritesRef.once('value');
-
-      const favoritesData: Array<Partial<Media>> = Object.values(
-        snapshot.val(),
-      ).map((id: number) => ({ id }));
-
-      return favoritesData;
+      if (snapshot.val()) {
+        const favoritesData: Array<Partial<Media>> = Object.keys(
+          snapshot.val(),
+        ).map((id) => ({
+          id: parseInt(id, 10),
+        }));
+        return favoritesData;
+      }
+      return [];
     } catch (error) {
       throw Error(error);
       return [];

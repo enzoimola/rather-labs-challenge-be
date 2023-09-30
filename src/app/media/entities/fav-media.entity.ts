@@ -6,4 +6,6 @@ export class FavMedia {
   id: number;
   @Field(() => String)
   uid: string;
+  @Field(() => Boolean)
+  isFav: boolean;
 }
