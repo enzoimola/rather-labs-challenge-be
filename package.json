@@ -1,8 +1,8 @@
 {
   "name": "rather-labs-challenge-be",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Backend repository of our Movie & TV Show web application",
+  "author": "Enzo Imola",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
