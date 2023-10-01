@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { MovieDbResponseResult } from '../../models/types/movie-db-response/MovieDbResponseResult.type';
+import { MovieDbResponseResult } from '../../models/types/movie-db-response/movie-db-response-result.type';
 import { MovieRepository } from './movie.repository';
-import { IMedia } from '../../models/interfaces/media.interface';
-import { MovieDetailDbResponse } from '../../models/types/movie-db-response/MovieDetailDbResponse';
-import { DetailMedia } from '../media/entities/detailMedia.entity';
+import { IMedia } from '../../models/interfaces/media/media.interface';
+import { MovieDetailDbResponse } from '../../models/types/movie-db-response/movie-detail-db-response';
+import { DetailMedia } from '../media/entities/detail-media.entity';
 
 @Injectable()
 export class MovieService {

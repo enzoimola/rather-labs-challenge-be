@@ -1,4 +1,4 @@
-import { TvDbResponseResult } from './TvDbResponseResult.type';
+import { TvDbResponseResult } from './tv-db-response-result.type';
 
 export type TvDbResponse = {
   page: number;

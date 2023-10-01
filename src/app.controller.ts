@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { IMedia } from './models/interfaces/media.interface';
+import { IMedia } from './models/interfaces/media/media.interface';
 import { CreateUserInput } from './app/user/dto/create-user.input';
-import { ICreateUserResponse } from './models/interfaces/user/createUserResponse.interface';
-import { DetailMedia } from './app/media/entities/detailMedia.entity';
+import { ICreateUserResponse } from './models/interfaces/user/create-user-response.interface';
+import { DetailMedia } from './app/media/entities/detail-media.entity';
 import { FavMedia } from './app/media/dto/create-media.input';
 
 @Controller('')

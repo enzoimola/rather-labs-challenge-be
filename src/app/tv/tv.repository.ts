@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { TvDbResponseResult } from '../../models/types/tv-db-response/TvDbResponseResult.type';
-import { TvDetailDbResponse } from '../../models/types/tv-db-response/TvDetailDbResponse';
+import { TvDbResponseResult } from '../../models/types/tv-db-response/tv-db-response-result.type';
+import { TvDetailDbResponse } from '../../models/types/tv-db-response/tv-detail-db-response';
 
 @Injectable()
 export class TvRepository {

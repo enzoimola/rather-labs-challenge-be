@@ -1,4 +1,4 @@
-import { MovieDbResponseResult } from './MovieDbResponseResult.type';
+import { MovieDbResponseResult } from './movie-db-response-result.type';
 
 export type MovieDbResponse = {
   page: number;

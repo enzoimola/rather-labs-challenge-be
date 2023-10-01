@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
-import { ISaveMedia } from '../../models/interfaces/save-media.interface';
+import { ISaveMedia } from '../../models/interfaces/media/save-media.interface';
 import { Media } from './entities/media.entity';
 import { IResponseFavMedia } from '../../models/interfaces/media/response-fav-media.interface';
 import { FavMedia } from './dto/create-media.input';

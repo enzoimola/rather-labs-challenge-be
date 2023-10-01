@@ -3,9 +3,9 @@ import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
-import { ICreateUserResponse } from '../../models/interfaces/user/createUserResponse.interface';
-import { IResponse } from '../../models/interfaces/IResponse.interface';
-import { UserResponse } from './entities/userResponse.entity';
+import { ICreateUserResponse } from '../../models/interfaces/user/create-user-response.interface';
+import { IResponse } from '../../models/interfaces/media/response.interface';
+import { UserResponse } from './entities/user-response.entity';
 import { Body } from '@nestjs/common';
 
 @Resolver(() => User)

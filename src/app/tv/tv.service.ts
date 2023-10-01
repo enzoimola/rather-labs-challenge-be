@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
 import { TvRepository } from './tv.repository';
-import { TvDbResponseResult } from '../../models/types/tv-db-response/TvDbResponseResult.type';
-import { IMedia } from '../../models/interfaces/media.interface';
-import { TvDetailDbResponse } from '../../models/types/tv-db-response/TvDetailDbResponse';
-import { DetailMedia } from '../media/entities/detailMedia.entity';
+import { TvDbResponseResult } from '../../models/types/tv-db-response/tv-db-response-result.type';
+import { IMedia } from '../../models/interfaces/media/media.interface';
+import { TvDetailDbResponse } from '../../models/types/tv-db-response/tv-detail-db-response';
+import { DetailMedia } from '../media/entities/detail-media.entity';
 
 @Injectable()
 export class TvService {

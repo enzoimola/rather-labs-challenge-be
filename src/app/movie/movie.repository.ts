@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { MovieDbResponseResult } from '../../models/types/movie-db-response/MovieDbResponseResult.type';
-import { MovieDetailDbResponse } from '../../models/types/movie-db-response/MovieDetailDbResponse';
+import { MovieDbResponseResult } from '../../models/types/movie-db-response/movie-db-response-result.type';
+import { MovieDetailDbResponse } from '../../models/types/movie-db-response/movie-detail-db-response';
 
 @Injectable()
 export class MovieRepository {

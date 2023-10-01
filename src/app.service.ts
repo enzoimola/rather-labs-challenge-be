@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { MediaService } from './app/media/media.service';
-import { IMedia } from './models/interfaces/media.interface';
-import { IDetailMedia } from './models/interfaces/detailMedia.interface';
+import { IMedia } from './models/interfaces/media/media.interface';
+import { IDetailMedia } from './models/interfaces/media/detail-media.interface';
 import { CreateUserInput } from './app/user/dto/create-user.input';
-import { ICreateUserResponse } from './models/interfaces/user/createUserResponse.interface';
+import { ICreateUserResponse } from './models/interfaces/user/create-user-response.interface';
 import { UserService } from './app/user/user.service';
-import { IResponse } from './models/interfaces/IResponse.interface';
-import { DetailMedia } from './app/media/entities/detailMedia.entity';
+import { IResponse } from './models/interfaces/media/response.interface';
+import { DetailMedia } from './app/media/entities/detail-media.entity';
 import { IResponseFavMedia } from './models/interfaces/media/response-fav-media.interface';
 import { FavMedia } from './app/media/dto/create-media.input';
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
-import { ICreateUserResponse } from '../../models/interfaces/user/createUserResponse.interface';
+import { ICreateUserResponse } from '../../models/interfaces/user/create-user-response.interface';
 import { CreateUserInput } from './dto/create-user.input';
 
 @Injectable()

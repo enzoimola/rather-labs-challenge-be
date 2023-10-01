@@ -1,9 +1,9 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { MediaService } from './media.service';
 import { Media } from './entities/media.entity';
-import { IMedia } from '../../models/interfaces/media.interface';
-import { DetailMedia } from './entities/detailMedia.entity';
-import { GetUrlMedia } from './entities/getUrlMedia.entity';
+import { IMedia } from '../../models/interfaces/media/media.interface';
+import { DetailMedia } from './entities/detail-media.entity';
+import { GetUrlMedia } from './entities/get-url-media.entity';
 import { IResponseFavMedia } from '../../models/interfaces/media/response-fav-media.interface';
 import { FavMedia } from './dto/create-media.input';
 import { FavMediaEntity } from './entities/fav-media.entity';

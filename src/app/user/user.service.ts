@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { UserRepository } from './user.repository';
-import { ICreateUserResponse } from '../../models/interfaces/user/createUserResponse.interface';
+import { ICreateUserResponse } from '../../models/interfaces/user/create-user-response.interface';
 
 @Injectable()
 export class UserService {

@@ -1,4 +1,4 @@
-import { MediaDbResponseResult } from './MediaDbResponseResult.type';
+import { MediaDbResponseResult } from './media-db-response-result.type';
 
 export type MediaDbResponse = {
   page: number;
