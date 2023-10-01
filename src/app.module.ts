@@ -4,7 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
-import { MediaModule } from './media/media.module';
+import { MediaModule } from './app/media/media.module';
+import { UserModule } from './app/user/user.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { MediaModule } from './media/media.module';
       typePaths: ['./**/*.graphql'],
     }),
     MediaModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

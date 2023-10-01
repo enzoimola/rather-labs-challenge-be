@@ -3,9 +3,74 @@
 # ------------------------------------------------------
 
 type Media {
-  media: String!
+  id: Float!
+  name: String!
+  posterPath: String
+  releaseDate: String
+  voteAverage: Float
+  isMovie: Boolean
+}
+
+type DetailMedia {
+  id: Float
+  name: String
+  posterPath: String
+  releaseDate: String
+  voteAverage: Float
+  overview: String
+  tagline: String
+  homepage: String
+  actors: [CastMemberEntity!]
+}
+
+type CastMemberEntity {
+  id: ID
+  name: String
+  character: String
+  knowForDepartment: String
+  popularity: Float
+  profilePath: String
+}
+
+type FavMediaEntity {
+  id: Float
+  uid: String!
+  isFav: Boolean!
+}
+
+type IAddFavMediaResponse {
+  success: Boolean!
+}
+
+type ICreateUserResponse {
+  email: String
+}
+
+type UserResponse {
+  uid: String!
+  email: String!
 }
 
 type Query {
-  helloMedia: Media!
+  media: [Media!]!
+  detailMedia(id: Float!, isMovie: Boolean!): DetailMedia!
+  getFavorites(uid: String!): [FavMediaEntity!]!
+  getUser(uid: String!): UserResponse!
+}
+
+type Mutation {
+  addFavMedia(media: FavMedia!): IAddFavMediaResponse!
+  createUser(input: CreateUserInput!): ICreateUserResponse!
+}
+
+input FavMedia {
+  id: Float
+  uid: String!
+  isFav: Boolean!
+}
+
+input CreateUserInput {
+  uid: String!
+  email: String!
+  password: String!
 }
