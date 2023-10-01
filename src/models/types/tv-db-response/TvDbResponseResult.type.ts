@@ -8,7 +8,7 @@ export type TvDbResponseResult = {
   overview: string;
   popularity: number;
   poster_path: string;
-  release_date: string;
+  first_air_date: string;
   name: string;
   video: false;
   vote_average: number;

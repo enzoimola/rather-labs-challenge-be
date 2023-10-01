@@ -2,12 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { MediaService } from './app/media/media.service';
 import { IMedia } from './models/interfaces/media.interface';
 import { IDetailMedia } from './models/interfaces/detailMedia.interface';
-import { FavMedia } from './app/media/entities/fav-media.entity';
 import { CreateUserInput } from './app/user/dto/create-user.input';
 import { ICreateUserResponse } from './models/interfaces/user/createUserResponse.interface';
 import { UserService } from './app/user/user.service';
 import { IResponse } from './models/interfaces/IResponse.interface';
 import { DetailMedia } from './app/media/entities/detailMedia.entity';
+import { IResponseFavMedia } from './models/interfaces/media/response-fav-media.interface';
+import { FavMedia } from './app/media/dto/create-media.input';
 
 @Injectable()
 export class AppService {
@@ -36,7 +37,7 @@ export class AppService {
     return await this.mediaService.fetchFindBy(id, isMovie);
   }
 
-  async saveFavMedia(media: FavMedia): Promise<void> {
+  async saveFavMedia(media: FavMedia): Promise<IResponseFavMedia> {
     return await this.mediaService.addFavoriteMedia(media);
   }
 

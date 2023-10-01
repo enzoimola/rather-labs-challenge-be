@@ -2,12 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type FavMedia {
-  id: Float
-  uid: String!
-  isFav: Boolean!
-}
-
 type Media {
   id: Float!
   name: String!
@@ -43,9 +37,18 @@ type GetUrlMedia {
   homepage: String
 }
 
-type User {
-  email: String!
-  password: String!
+type IResponseFavMedia {
+  success: Boolean!
+}
+
+type FavMediaEntity {
+  id: Float
+  uid: String!
+  isFav: Boolean!
+}
+
+type ICreateUserResponse {
+  email: String
 }
 
 type UserResponse {
@@ -56,27 +59,24 @@ type UserResponse {
 type Query {
   media: [Media!]!
   detailMedia(id: Float!, isMovie: Boolean!): DetailMedia!
-  getFavorites(uid: String!): [FavMedia!]!
+  getFavorites(uid: String!): [FavMediaEntity!]!
   getURLMedia: [GetUrlMedia!]!
   getUser(uid: String!): UserResponse!
-  user(id: Int!): User!
 }
 
 type Mutation {
-  createUser(input: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User!
+  addFavMedia(media: FavMedia!): IResponseFavMedia!
+  createUser(input: CreateUserInput!): ICreateUserResponse!
+}
+
+input FavMedia {
+  id: Float
+  uid: String!
+  isFav: Boolean!
 }
 
 input CreateUserInput {
   uid: String!
   email: String!
   password: String!
-}
-
-input UpdateUserInput {
-  uid: String
-  email: String
-  password: String
-  id: Int!
 }

@@ -6,12 +6,13 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { ICreateUserResponse } from '../../models/interfaces/user/createUserResponse.interface';
 import { IResponse } from '../../models/interfaces/IResponse.interface';
 import { UserResponse } from './entities/userResponse.entity';
+import { Body } from '@nestjs/common';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @Mutation(() => User)
+  @Mutation(() => ICreateUserResponse)
   async createUser(
     @Args('input') input: CreateUserInput,
   ): Promise<ICreateUserResponse> {
@@ -21,25 +22,5 @@ export class UserResolver {
   @Query(() => UserResponse)
   async getUser(@Args('uid') uid: string): Promise<IResponse> {
     return await this.userService.getUser(uid);
-  }
-
-  @Query(() => [User], { name: 'user' })
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  @Query(() => User, { name: 'user' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.userService.findOne(id);
-  }
-
-  @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.userService.update(updateUserInput.id, updateUserInput);
-  }
-
-  @Mutation(() => User)
-  removeUser(@Args('id', { type: () => Int }) id: number) {
-    return this.userService.remove(id);
   }
 }

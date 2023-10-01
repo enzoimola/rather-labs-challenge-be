@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { FavMedia } from './entities/fav-media.entity';
 import { MediaService } from './media.service';
+import { FavMedia } from './dto/create-media.input';
 
 @Controller('media-fav')
 export class MediaFavController {
@@ -10,9 +10,4 @@ export class MediaFavController {
   async addFavoriteMovie(@Body() mediaFav: FavMedia): Promise<void> {
     await this.mediaService.addFavoriteMedia(mediaFav);
   }
-
-  // @Get('get-favorites')
-  // async getFavorites() {
-  //   return await this.mediaService.getFavorites();
-  // }
 }

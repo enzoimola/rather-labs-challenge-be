@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { FavMedia } from './entities/fav-media.entity';
 import * as admin from 'firebase-admin';
 import { ISaveMedia } from '../../models/interfaces/save-media.interface';
-import { IMediaGetResponse } from '../../models/interfaces/mediaGetResponse.interface';
-import { GetUrlMedia } from './entities/getUrlMedia.entity';
-import { IResponse } from '../../models/interfaces/IResponse.interface';
 import { Media } from './entities/media.entity';
+import { IResponseFavMedia } from '../../models/interfaces/media/response-fav-media.interface';
+import { FavMedia } from './dto/create-media.input';
 
 @Injectable()
 export class MediaRepository {
@@ -26,26 +24,23 @@ export class MediaRepository {
     return json.results;
   }
 
-  async saveFavMedia(media: FavMedia): Promise<boolean> {
+  async saveFavMedia(media: FavMedia): Promise<IResponseFavMedia> {
     const database = admin.database();
     const { uid, id } = media;
+    const responseFM: IResponseFavMedia = { success: true };
 
     const dbFavRef = database.ref(`favorites/${uid}`);
-    const newUserRef = dbFavRef.push();
-
     try {
       if (!media.isFav) {
-        // await newUserRef.set(id);
         await dbFavRef.child(String(id)).set(true);
-        return true;
       } else {
         await dbFavRef.child(String(id)).remove();
-        return false;
       }
     } catch (error) {
       throw Error(error);
-      return false;
+      return { success: false };
     }
+    return responseFM;
   }
 
   async saveMedia(media: ISaveMedia): Promise<any> {

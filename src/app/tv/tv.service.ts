@@ -21,8 +21,8 @@ export class TvService {
     return results.map((r: TvDbResponseResult) => ({
       id: r.id,
       name: r.original_name || r.name,
-      posterPath: r.poster_path,
-      releaseDate: r.release_date,
+      posterPath: r.poster_path ? r.poster_path.split('/')[1] : r.poster_path,
+      releaseDate: r.first_air_date,
       voteAverage: r.vote_average,
       isMovie: false,
     }));

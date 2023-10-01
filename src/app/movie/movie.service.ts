@@ -21,7 +21,7 @@ export class MovieService {
     return results.map((r: MovieDbResponseResult) => ({
       id: r.id,
       name: r.original_title || r.title,
-      posterPath: r.poster_path,
+      posterPath: r.poster_path ? r.poster_path.split('/')[1] : r.poster_path,
       releaseDate: r.release_date,
       voteAverage: r.vote_average,
       isMovie: true,

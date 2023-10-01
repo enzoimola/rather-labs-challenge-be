@@ -1,9 +1,7 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class ICreateUserResponse {
-  @Field(() => Int)
-  code: number;
-  @Field(() => Boolean)
-  success: boolean;
+  @Field(() => String, { nullable: true })
+  email: string;
 }

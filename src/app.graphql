@@ -5,7 +5,4 @@ type Query {
   login: User,
 }
 
-type User {
-  email: String!
-  password: String!
-}
+

@@ -5,8 +5,9 @@ import { IMedia } from '../../models/interfaces/media.interface';
 import { MediaRepository } from './media.repository';
 import { MovieDbResponseResult } from '../../models/types/movie-db-response/MovieDbResponseResult.type';
 import { MediaDbResponseResult } from '../../models/types/media-db-response/MediaDbResponseResult.type';
-import { FavMedia } from './entities/fav-media.entity';
 import { DetailMedia } from './entities/detailMedia.entity';
+import { IResponseFavMedia } from '../../models/interfaces/media/response-fav-media.interface';
+import { FavMedia } from './dto/create-media.input';
 
 @Injectable()
 export class MediaService {
@@ -54,8 +55,8 @@ export class MediaService {
     return data;
   }
 
-  async addFavoriteMedia(media: FavMedia): Promise<void> {
-    await this.mediaRepository.saveFavMedia(media);
+  async addFavoriteMedia(media: FavMedia): Promise<IResponseFavMedia> {
+    return await this.mediaRepository.saveFavMedia(media);
   }
 
   async getFavorites(uid: string): Promise<any> {

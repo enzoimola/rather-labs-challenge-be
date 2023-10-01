@@ -1,10 +1,12 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { MediaService } from './media.service';
 import { Media } from './entities/media.entity';
 import { IMedia } from '../../models/interfaces/media.interface';
 import { DetailMedia } from './entities/detailMedia.entity';
-import { FavMedia } from './entities/fav-media.entity';
 import { GetUrlMedia } from './entities/getUrlMedia.entity';
+import { IResponseFavMedia } from '../../models/interfaces/media/response-fav-media.interface';
+import { FavMedia } from './dto/create-media.input';
+import { FavMediaEntity } from './entities/fav-media.entity';
 
 @Resolver(() => Media)
 export class MediaResolver {
@@ -25,7 +27,7 @@ export class MediaResolver {
     return resp;
   }
 
-  @Query(() => [FavMedia])
+  @Query(() => [FavMediaEntity])
   async getFavorites(
     @Args('uid', { type: () => String }) uid: string,
   ): Promise<any> {
@@ -36,5 +38,12 @@ export class MediaResolver {
   @Query(() => [GetUrlMedia])
   async getURLMedia() {
     return this.mediaService.getURLMedia();
+  }
+
+  @Mutation(() => IResponseFavMedia)
+  async addFavMedia(
+    @Args('media') media: FavMedia,
+  ): Promise<IResponseFavMedia> {
+    return await this.mediaService.addFavoriteMedia(media);
   }
 }
