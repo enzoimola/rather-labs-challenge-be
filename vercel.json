@@ -9,6 +9,19 @@
       }
     }
   ],
+  "env": {
+    "PORT": "@PORT",
+    "FIREBASE_PRIVATE_KY":"@FIREBASE_PRIVATE_KY",
+    "FIREBASE_DATABASE_URL": "@FIREBASE_DATABASE_URL",
+    "FIREBASE_PROJECT_ID":"@FIREBASE_PROJECT_ID",
+    "FIREBASE_CLIENT_EMAIL": "@FIREBASE_CLIENT_EMAIL",
+    "API_KEY":"@API_KEY",
+    "API_URL_POPULAR_MOVIES": "@API_URL_POPULAR_MOVIES",
+    "API_URL_MOVIES": "@API_URL_MOVIES",
+    "API_URL_POPULAR_TV":"@API_URL_POPULAR_TV",
+    "API_URL_TV": "@API_URL_TV",
+    "API_URL_CREDITS": "@API_URL_CREDITS"
+  },
   "routes": [
     {
       "src": "/.*", "dest": "src/main.ts"
