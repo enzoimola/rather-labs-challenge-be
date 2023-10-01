@@ -32,19 +32,14 @@ type CastMemberEntity {
   profilePath: String
 }
 
-type GetUrlMedia {
-  id: Float
-  homepage: String
-}
-
-type IResponseFavMedia {
-  success: Boolean!
-}
-
 type FavMediaEntity {
   id: Float
   uid: String!
   isFav: Boolean!
+}
+
+type IAddFavMediaResponse {
+  success: Boolean!
 }
 
 type ICreateUserResponse {
@@ -60,12 +55,11 @@ type Query {
   media: [Media!]!
   detailMedia(id: Float!, isMovie: Boolean!): DetailMedia!
   getFavorites(uid: String!): [FavMediaEntity!]!
-  getURLMedia: [GetUrlMedia!]!
   getUser(uid: String!): UserResponse!
 }
 
 type Mutation {
-  addFavMedia(media: FavMedia!): IResponseFavMedia!
+  addFavMedia(media: FavMedia!): IAddFavMediaResponse!
   createUser(input: CreateUserInput!): ICreateUserResponse!
 }
 

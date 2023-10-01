@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { ICreateUserResponse } from '../../models/interfaces/user/create-user-response.interface';
 import { CreateUserInput } from './dto/create-user.input';
+import { IUserIdResponse } from '../../models/interfaces/user/user-id-response.interface';
 
 @Injectable()
 export class UserRepository {
@@ -21,7 +22,7 @@ export class UserRepository {
     return response;
   }
 
-  async getUser(uid: string): Promise<any> {
+  async getUser(uid: string): Promise<IUserIdResponse> {
     const dbUserRef = admin.database().ref(`users`);
 
     try {
@@ -35,6 +36,7 @@ export class UserRepository {
       throw new Error(
         'Error checking user existence in Firebase: ' + error.message,
       );
+      return { email: '', uid: '' };
     }
   }
 }

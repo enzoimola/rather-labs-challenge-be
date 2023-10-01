@@ -1,39 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { TvDbResponseResult } from '../../models/types/tv-db-response/tv-db-response-result.type';
 import { TvDetailDbResponse } from '../../models/types/tv-db-response/tv-detail-db-response';
+import * as process from 'process';
 
 @Injectable()
 export class TvRepository {
+  options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${process.env.API_KEY}`,
+    },
+  };
   async findAll(): Promise<Array<TvDbResponseResult>> {
-    const url = 'https://api.themoviedb.org/3/tv/popular?language=en-US&page=1';
+    const url = process.env.API_URL_POPULAR_TV;
 
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MTYwMzZlNTAxMjQxMzdiOWMzNjYyZjM0MTViMTFkZSIsInN1YiI6IjY1MGQ4MDFlOTNkYjkyMDEzOGU1MzhkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.keetD6EUEkRf5FK-JbfJIyF-C4-VwyieHnNk__jPZn8',
-      },
-    };
-
-    const response = await fetch(url, options);
+    const response = await fetch(url, this.options);
     const json = await response.json();
     return json.results;
   }
 
   async findById(id: number): Promise<TvDetailDbResponse> {
-    const url = `https://api.themoviedb.org/3/tv/${id}?language=en-US&append_to_response=credits`;
+    const url = `${process.env.API_URL_TV}${id}?${process.env.API_URL_CREDITS}`;
 
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MTYwMzZlNTAxMjQxMzdiOWMzNjYyZjM0MTViMTFkZSIsInN1YiI6IjY1MGQ4MDFlOTNkYjkyMDEzOGU1MzhkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.keetD6EUEkRf5FK-JbfJIyF-C4-VwyieHnNk__jPZn8',
-      },
-    };
-
-    const response = await fetch(url, options);
+    const response = await fetch(url, this.options);
     const json = await response.json();
 
     return json;

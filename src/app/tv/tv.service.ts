@@ -2,22 +2,22 @@ import { Injectable } from '@nestjs/common';
 
 import { TvRepository } from './tv.repository';
 import { TvDbResponseResult } from '../../models/types/tv-db-response/tv-db-response-result.type';
-import { IMedia } from '../../models/interfaces/media/media.interface';
 import { TvDetailDbResponse } from '../../models/types/tv-db-response/tv-detail-db-response';
 import { DetailMedia } from '../media/entities/detail-media.entity';
+import { Media } from '../media/entities/media.entity';
 
 @Injectable()
 export class TvService {
   constructor(private readonly tvRepository: TvRepository) {}
 
-  async findAll(): Promise<Array<IMedia>> {
+  async findAll(): Promise<Array<Media>> {
     const results: Array<TvDbResponseResult> =
       await this.tvRepository.findAll();
 
     return this.tvDbResultToIMediaParser(results);
   }
 
-  tvDbResultToIMediaParser(results: Array<TvDbResponseResult>): Array<IMedia> {
+  tvDbResultToIMediaParser(results: Array<TvDbResponseResult>): Array<Media> {
     return results.map((r: TvDbResponseResult) => ({
       id: r.id,
       name: r.original_name || r.name,

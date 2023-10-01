@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { IMedia } from './models/interfaces/media/media.interface';
 import { CreateUserInput } from './app/user/dto/create-user.input';
 import { ICreateUserResponse } from './models/interfaces/user/create-user-response.interface';
 import { DetailMedia } from './app/media/entities/detail-media.entity';
 import { FavMedia } from './app/media/dto/create-media.input';
+import { Media } from './app/media/entities/media.entity';
 
 @Controller('')
 export class AppController {
@@ -23,13 +23,8 @@ export class AppController {
   }
 
   @Get()
-  getHello(): Promise<Array<IMedia>> {
+  getHello(): Promise<Array<Media>> {
     return this.appService.findAll();
-  }
-
-  @Get('/search')
-  getMediaSearch(): Promise<Array<IMedia>> {
-    return this.appService.findSearch('batman');
   }
 
   @Get('/findById/:id/:isMovie')

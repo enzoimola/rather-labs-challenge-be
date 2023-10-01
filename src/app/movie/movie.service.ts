@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { MovieDbResponseResult } from '../../models/types/movie-db-response/movie-db-response-result.type';
 import { MovieRepository } from './movie.repository';
-import { IMedia } from '../../models/interfaces/media/media.interface';
 import { MovieDetailDbResponse } from '../../models/types/movie-db-response/movie-detail-db-response';
 import { DetailMedia } from '../media/entities/detail-media.entity';
+import { Media } from '../media/entities/media.entity';
 
 @Injectable()
 export class MovieService {
   constructor(private readonly movieRepository: MovieRepository) {}
 
-  async findAll(): Promise<Array<IMedia>> {
+  async findAll(): Promise<Array<Media>> {
     const results: Array<MovieDbResponseResult> =
       await this.movieRepository.findAll();
     return this.movieDbResultToMediaParser(results);
@@ -17,7 +17,7 @@ export class MovieService {
 
   movieDbResultToMediaParser(
     results: Array<MovieDbResponseResult>,
-  ): Array<IMedia> {
+  ): Array<Media> {
     return results.map((r: MovieDbResponseResult) => ({
       id: r.id,
       name: r.original_title || r.title,

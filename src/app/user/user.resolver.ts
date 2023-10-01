@@ -1,12 +1,10 @@
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
-import { UpdateUserInput } from './dto/update-user.input';
 import { ICreateUserResponse } from '../../models/interfaces/user/create-user-response.interface';
-import { IResponse } from '../../models/interfaces/media/response.interface';
 import { UserResponse } from './entities/user-response.entity';
-import { Body } from '@nestjs/common';
+import { IUserIdResponse } from '../../models/interfaces/user/user-id-response.interface';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -20,7 +18,7 @@ export class UserResolver {
   }
 
   @Query(() => UserResponse)
-  async getUser(@Args('uid') uid: string): Promise<IResponse> {
+  async getUser(@Args('uid') uid: string): Promise<IUserIdResponse> {
     return await this.userService.getUser(uid);
   }
 }

@@ -1,11 +1,7 @@
-// export interface IMedia {
-//   id: number;
-//   name: string;
-// }
-
 import { Field, ObjectType } from '@nestjs/graphql';
+
 @ObjectType()
-export class IResponseFavMedia {
+export class IAddFavMediaResponse {
   @Field(() => Boolean)
   success: boolean;
 }
