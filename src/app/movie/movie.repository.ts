@@ -32,7 +32,7 @@ export class MovieRepository {
       const json = await response.json();
       return json;
     } catch (e) {
-      throw new Error('Error fetching movies: ' + e.message);
+      throw new Error('Error fetching movie by id: ' + e.message);
     }
   }
 }
