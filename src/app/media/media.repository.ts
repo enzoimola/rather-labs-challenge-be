@@ -10,8 +10,8 @@ export class MediaRepository {
     const { uid, id } = media;
     const responseFM: IAddFavMediaResponse = { success: true };
     try {
-      const dbRef = admin.database().ref();
-      const ref = await dbRef.child('favorites').child(`${uid}`);
+      const dbRef = admin.database().ref('favorites');
+      const ref = await dbRef.child(`${uid}`);
       if (!media.isFav) {
         await ref.child(String(id)).set(true);
       } else {
@@ -26,8 +26,8 @@ export class MediaRepository {
 
   async getFavorites(uid: string): Promise<Array<Partial<Media>>> {
     try {
-      const dbRef = admin.database().ref();
-      const snapshot = await dbRef.child('favorites').child(`${uid}`).get();
+      const dbRef = admin.database().ref('favorites');
+      const snapshot = await dbRef.child(`${uid}`).get();
       if (snapshot.val()) {
         const favoritesData: Array<Partial<Media>> = Object.keys(
           snapshot.val(),
