@@ -24,7 +24,11 @@ async function bootstrap() {
     databaseURL: process.env.FIREBASE_DATABASE_URL,
   });
 
-  app.enableCors();
+  app.enableCors({
+    allowedHeaders: ['content-type'],
+    origin: process.env.URL_WEBAPP,
+    credentials: true,
+  });
 
   await app.listen(process.env.PORT);
 }
