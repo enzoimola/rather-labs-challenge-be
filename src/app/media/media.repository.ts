@@ -7,27 +7,31 @@ import { FavMedia } from './dto/create-media.input';
 @Injectable()
 export class MediaRepository {
   async addFavMedia(media: FavMedia): Promise<IAddFavMediaResponse> {
+    const database = admin.database();
     const { uid, id } = media;
     const responseFM: IAddFavMediaResponse = { success: true };
+
     try {
-      const dbRef = admin.database().ref('favorites');
-      const ref = await dbRef.child(`${uid}`);
+      const dbFavRef = database.ref(`favorites/${uid}`);
       if (!media.isFav) {
-        await ref.child(String(id)).set(true);
+        await dbFavRef.child(String(id)).set(true);
       } else {
-        await ref.child(String(id)).remove();
+        await dbFavRef.child(String(id)).remove();
       }
     } catch (error) {
       throw Error(error);
       return { success: false };
     }
+
     return responseFM;
   }
 
   async getFavorites(uid: string): Promise<Array<Partial<Media>>> {
+    const database = admin.database();
+    const favoritesRef = database.ref(`favorites/${uid}`);
+
     try {
-      const dbRef = admin.database().ref('favorites');
-      const snapshot = await dbRef.child(`${uid}`).get();
+      const snapshot = await favoritesRef.once('value');
       if (snapshot.val()) {
         const favoritesData: Array<Partial<Media>> = Object.keys(
           snapshot.val(),
