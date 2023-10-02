@@ -24,11 +24,15 @@ async function bootstrap() {
     databaseURL: process.env.FIREBASE_DATABASE_URL,
   });
 
-  app.enableCors({
-    allowedHeaders: ['content-type'],
-    origin: process.env.URL_WEBAPP,
+  const options = {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
     credentials: true,
-  });
+  };
+
+  app.enableCors(options);
 
   await app.listen(process.env.PORT);
 }
