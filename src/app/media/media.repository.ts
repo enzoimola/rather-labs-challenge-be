@@ -3,6 +3,7 @@ import * as admin from 'firebase-admin';
 import { Media } from './entities/media.entity';
 import { IAddFavMediaResponse } from '../../models/interfaces/media/add-fav-media-response.interface';
 import { FavMedia } from './dto/create-media.input';
+import * as process from 'process';
 
 @Injectable()
 export class MediaRepository {
@@ -27,7 +28,9 @@ export class MediaRepository {
 
   async getFavorites(uid: string): Promise<Array<Partial<Media>>> {
     const database = admin.database();
-    const favoritesRef = database.ref(`favorites/${uid}`);
+    const favoritesRef = database.refFromURL(
+      `${process.env.FIREBASE_DATABASE_URL}favorites/${uid}`,
+    );
 
     try {
       const snapshot = await favoritesRef.once('value');
